@@ -1,16 +1,16 @@
 # AWS Academy Deployment Guide
 # =============================
 
-## 🎯 Overview
+## Overview
 This guide provides step-by-step instructions for deploying the Secure Application Design project on AWS Academy using two EC2 instances.
 
-## 📋 Prerequisites
+## Prerequisites
 - AWS Academy account with EC2 access
 - Domain name (required for Let's Encrypt certificates)
 - SSH key pair for EC2 access
 - Git repository access
 
-## 🏗️ Architecture
+## Architecture
 ```
 ┌─────────────────┐    HTTPS (443)    ┌──────────────────┐
 │   User Browser   │ ◄──────────────► │  Apache Server   │
@@ -25,7 +25,7 @@ This guide provides step-by-step instructions for deploying the Secure Applicati
 └─────────────────┘                  └──────────────────┘
 ```
 
-## 🔧 Step 1: Create EC2 Instances
+## Step 1: Create EC2 Instances
 
 ### Instance 1: Apache Web Server
 1. **Launch Instance** in AWS Academy Console
@@ -50,7 +50,7 @@ This guide provides step-by-step instructions for deploying the Secure Applicati
 6. **Storage**: 20GB GP2 (default)
 7. **Tags**: Name = "Spring-Boot-App"
 
-## 🚀 Step 2: Deploy Apache Server (Instance 1)
+## Step 2: Deploy Apache Server (Instance 1)
 
 ### 2.1 Connect via SSH
 ```bash
@@ -91,7 +91,7 @@ sudo nano /var/www/html/secure-app/config.js
 BASE_URL: 'https://your-spring-domain.com'
 ```
 
-## ☕ Step 3: Deploy Spring Boot (Instance 2)
+## Step 3: Deploy Spring Boot (Instance 2)
 
 ### 3.1 Connect via SSH
 ```bash
@@ -130,7 +130,7 @@ cors.allowed-origins=https://your-apache-domain.com
 sudo systemctl restart secure-app
 ```
 
-## 🔒 Step 4: SSL Certificate Management
+## Step 4: SSL Certificate Management
 
 ### 4.1 Let's Encrypt for Apache
 ```bash
@@ -152,7 +152,7 @@ ls -la /home/ec2-user/keystore.p12
 sudo /home/ec2-user/ssl-renewal.sh
 ```
 
-## 🧪 Step 5: Testing and Verification
+## Step 5: Testing and Verification
 
 ### 5.1 Test Apache Server
 ```bash
@@ -180,7 +180,7 @@ sudo systemctl status secure-app
 3. Login with credentials
 4. Test all features (secure data, users, messages)
 
-## 📊 Step 6: Monitoring and Logs
+## Step 6: Monitoring and Logs
 
 ### 6.1 Apache Logs
 ```bash
@@ -203,7 +203,7 @@ sudo journalctl -u secure-app -f
 sudo journalctl -u secure-app --since "1 hour ago" -p err
 ```
 
-## 🛠️ Step 7: Troubleshooting
+## Step 7: Troubleshooting
 
 ### Common Issues and Solutions
 
@@ -248,56 +248,46 @@ sudo firewall-cmd --permanent --add-port=8443/tcp
 sudo firewall-cmd --reload
 ```
 
-## 📝 Step 8: Documentation and Screenshots
+## Step 8: Documentation and Screenshots
 
 ### Required Screenshots
 1. **AWS Console** - EC2 instances running
+
+![imagen1](img/imagen1.png)
+
 2. **Security Groups** - Configuration rules
+
+![imagen2](img/imagen2.png)
+
+![imagen3](img/imagen3.png)
+
 3. **Apache Server** - HTTPS working with padlock
+
+![imagen7](img/imagen7.png)
+
 4. **Spring Boot** - API responding via HTTPS
+
+![imagen4](img/imagen4.png)
+
 5. **Application** - Login screen
+
+![imagen8](img/imagen8.png)
+
 6. **Application** - Dashboard after login
+
+![imagen5](img/imagen5.png)
+
 7. **Certificate** - Let's Encrypt details
 
-### Video Demonstration
-Create a 5-10 minute video showing:
-1. Application architecture explanation
-2. Login and registration flow
-3. HTTPS security features
-4. API communication between servers
-5. Security features demonstration
+![imagen6](img/imagen6.png)
 
-## 🎯 Final Checklist
 
-- [ ] Two EC2 instances created and running
-- [ ] Apache serving frontend via HTTPS
-- [ ] Spring Boot serving API via HTTPS
-- [ ] Let's Encrypt certificates installed
-- [ ] CORS properly configured
-- [ ] Application fully functional
-- [ ] All security features working
-- [ ] Documentation complete
-- [ ] Screenshots captured
-- [ ] Video demonstration created
-
-## 📞 Support Resources
+## Support Resources
 
 - **AWS Academy Documentation**: Check your academy portal
 - **Let's Encrypt**: https://letsencrypt.org/docs/
 - **Apache HTTP Server**: https://httpd.apache.org/docs/
 - **Spring Boot**: https://spring.io/guides/gs/spring-boot/
-
-## 🔄 Maintenance
-
-### Weekly Tasks
-- Check SSL certificate expiry
-- Review application logs
-- Update security patches
-
-### Monthly Tasks
-- Renew SSL certificates (automatic)
-- Update application dependencies
-- Backup configuration files
 
 ---
 
