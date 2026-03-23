@@ -275,7 +275,7 @@ sudo firewall-cmd --reload
 
 6. **Application** - Dashboard after login
 
-![imagen5](../img/imagen5.png)
+![imagen7](../img/imagen7.png)
 
 7. **Certificate** - Let's Encrypt details
 
