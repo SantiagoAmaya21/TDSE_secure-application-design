@@ -2,7 +2,7 @@
 
 A comprehensive secure web application built with Spring Boot backend and Apache frontend, demonstrating enterprise-level security practices including JWT authentication, TLS encryption, and secure deployment patterns.
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 This application implements a secure, scalable architecture with two main components:
 
@@ -20,7 +20,7 @@ This application implements a secure, scalable architecture with two main compon
 - **Security**: HTTPS-only communication, secure token storage
 - **UX**: Real-time validation, loading states, error handling
 
-## 🔐 Security Features
+## Security Features
 
 ### Authentication & Authorization
 - **JWT Tokens**: Secure stateless authentication
@@ -41,7 +41,7 @@ This application implements a secure, scalable architecture with two main compon
 - **XSS Protection**: Input sanitization and output encoding
 - **CSRF Protection**: Spring Security CSRF tokens
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 TDSE_secure-application-design/
@@ -105,7 +105,7 @@ TDSE_secure-application-design/
 └── README.md                        # This File
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Java 17 or higher
@@ -148,7 +148,7 @@ TDSE_secure-application-design/
 3. Login with your credentials
 4. Test all features: secure data access, user management, messaging
 
-## 🔧 Configuration
+## Configuration
 
 ### Backend Configuration (`application.properties`)
 - Database settings
@@ -162,9 +162,9 @@ TDSE_secure-application-design/
 - Environment detection
 - TLS enforcement
 
-## 🌐 AWS Deployment
+## AWS Deployment
 
-### 🚀 Quick Start (AWS Academy)
+### Quick Start (AWS Academy)
 
 #### Prerequisites
 - AWS Academy account with EC2 access
@@ -220,10 +220,10 @@ chmod +x scripts/setup-ssl-spring-duckdns.sh
 # No changes needed to application-production.properties
 ```
 
-### 📋 Detailed Instructions
+### Detailed Instructions
 For complete step-by-step instructions, see: **[scripts/aws-academy-guide.md](scripts/aws-academy-guide.md)**
 
-### 🔧 Manual Configuration
+### Manual Configuration
 
 #### Apache Configuration
 ```bash
@@ -253,7 +253,7 @@ mvn clean package -DskipTests
 java -jar -Dspring.profiles.active=production target/secureapp-0.0.1-SNAPSHOT.jar
 ```
 
-### 🔒 SSL/TLS Configuration
+### SSL/TLS Configuration
 
 #### Let's Encrypt for Apache
 ```bash
@@ -279,7 +279,7 @@ sudo openssl pkcs12 -export \
   -password pass:CHANGEME
 ```
 
-## 🔍 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /api/auth/login` - User login
@@ -292,7 +292,7 @@ sudo openssl pkcs12 -export \
 - `GET /api/data/users` - All users (authenticated)
 - `POST /api/data/message` - Send message
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 ```bash
@@ -311,7 +311,7 @@ mvn test
 - Validate input sanitization
 - Test rate limiting
 
-## 📊 Monitoring & Logging
+## Monitoring & Logging
 
 ### Application Logs
 - Spring Boot: Console and file logging
@@ -324,7 +324,7 @@ mvn test
 - Authentication success/failure
 - Resource utilization
 
-## 🔒 Security Best Practices Implemented
+## Security Best Practices Implemented
 
 1. **Password Security**
    - Minimum 6-character passwords
@@ -351,7 +351,7 @@ mvn test
    - API endpoint protection
    - CORS configuration
 
-## 🚨 Limitations & External Dependencies
+## Limitations & External Dependencies
 
 ### What Cannot Be Automated (Requires Manual Setup):
 
@@ -386,7 +386,7 @@ mvn test
    - SNS notification setup
    - Log aggregation
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -394,11 +394,11 @@ mvn test
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📝 License
+## License
 
 This project is part of the Enterprise Architecture Workshop: Secure Application Design.
 
-## 📞 Support
+## Support
 
 For questions or issues related to this workshop:
 - Check the documentation

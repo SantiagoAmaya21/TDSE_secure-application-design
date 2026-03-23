@@ -42,14 +42,14 @@ sudo systemctl stop secure-app || echo "Service not running, continuing..."
 # Generate SSL certificate for Spring Boot
 echo "🔐 Generating SSL certificate for Spring Boot..."
 for i in {1..3}; do
-    if sudo certbot certonly --standalone -d "$DOMAIN" --email your-email@example.com --agree-tos --no-eff-email; then
+    if sudo certbot certonly --standalone -d "$DOMAIN" --email "your-email@example.com" --agree-tos --no-eff-email --non-interactive; then
         echo "✅ SSL certificate generated successfully!"
         break
     else
         echo "❌ SSL certificate generation failed, attempt $i/3"
         if [ $i -eq 3 ]; then
             echo "🔄 You may need to run this manually:"
-            echo "   sudo certbot certonly --standalone -d $DOMAIN"
+            echo "   sudo certbot certonly --standalone -d $DOMAIN --email 'your-email@example.com' --agree-tos --no-eff-email"
             exit 1
         else
             echo "⏳ Waiting 60 seconds before retry..."
