@@ -78,6 +78,7 @@ TDSE_secure-application-design/
 ├── README.md                       # This file
 ├── .gitignore                      # Git ignore file
 └── .gitattributes                  # Git attributes
+```
 
 ## Getting Started
 
