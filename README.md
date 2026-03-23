@@ -78,32 +78,6 @@ TDSE_secure-application-design/
 ├── README.md                       # This file
 ├── .gitignore                      # Git ignore file
 └── .gitattributes                  # Git attributes
-```
-│   │   │   ├── java/co/edu/escuelaing/secureapp/
-│   │   │   │   ├── controller/       # REST Controllers
-│   │   │   │   ├── model/           # JPA Entities
-│   │   │   │   ├── dto/             # Data Transfer Objects
-│   │   │   │   ├── repository/      # JPA Repositories
-│   │   │   │   ├── service/         # Business Logic
-│   │   │   │   ├── security/        # Security Configuration
-│   │   │   │   └── config/          # Application Configuration
-│   │   │   └── resources/
-│   │   │       └── application.properties
-│   │   └── test/                    # Unit Tests
-│   ├── pom.xml                      # Maven Configuration
-│   └── img/                         # Documentation Images
-├── web-tier/                        # Apache Frontend
-│   ├── index.html                   # Main Application Page
-│   ├── styles.css                   # Modern CSS Styling
-│   ├── config.js                    # Application Configuration
-│   ├── api.js                       # API Service Layer
-│   ├── app.js                       # Main Application Logic
-│   ├── .gitattributes
-│   └── .gitignore
-├── .gitignore                       # Git Ignore Rules
-├── .gitattributes                   # Git Attributes
-└── README.md                        # This File
-```
 
 ## Getting Started
 
