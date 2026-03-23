@@ -49,6 +49,37 @@ TDSE_secure-application-design/
 │   ├── src/
 │   │   ├── main/
 │   │   │   ├── java/co/edu/escuelaing/secureapp/
+│   │   │   │   ├── config/           # Security, CORS configuration
+│   │   │   │   ├── controller/       # REST API controllers
+│   │   │   │   ├── dto/              # Data transfer objects
+│   │   │   │   ├── model/            # JPA entities
+│   │   │   │   ├── repository/       # Data repositories
+│   │   │   │   ├── security/         # JWT authentication
+│   │   │   │   ├── service/          # Business logic
+│   │   │   │   └── SecureappApplication.java
+│   │   │   └── resources/
+│   │   │       ├── application.properties           # Development config
+│   │   │       └── application-production.properties # Production config
+│   └── pom.xml
+├── web-tier/                        # Apache Frontend
+│   ├── index.html                   # Main HTML page
+│   ├── styles.css                   # CSS styling
+│   ├── config.js                    # Development configuration
+│   ├── config-production.js         # Production configuration
+│   ├── api.js                       # API client
+│   └── app.js                       # Application logic
+├── scripts/                         # AWS Deployment Scripts
+│   ├── aws-deploy-apache.sh         # Apache deployment
+│   ├── aws-deploy-spring.sh         # Spring Boot deployment
+│   ├── setup-ssl-spring.sh          # SSL configuration
+│   ├── deploy-complete.sh           # Complete deployment
+│   └── aws-academy-guide.md         # Detailed AWS guide
+├── img/                            # Screenshots and documentation
+├── README.md                       # This file
+├── .gitignore                      # Git ignore file
+└── .gitattributes                  # Git attributes
+```
+│   │   │   ├── java/co/edu/escuelaing/secureapp/
 │   │   │   │   ├── controller/       # REST Controllers
 │   │   │   │   ├── model/           # JPA Entities
 │   │   │   │   ├── dto/             # Data Transfer Objects
@@ -131,73 +162,121 @@ TDSE_secure-application-design/
 - Environment detection
 - TLS enforcement
 
-## 🌐 AWS Deployment Guide
+## 🌐 AWS Deployment
 
-### Prerequisites
-- AWS Academy account
-- EC2 Instances (2x t2.micro or larger)
-- Security Groups configuration
-- Let's Encrypt certificates
+### 🚀 Quick Start (AWS Academy)
 
-### Manual Deployment Steps in AWS Academy
+#### Prerequisites
+- AWS Academy account with EC2 access
+- Domain name (required for Let's Encrypt)
+- SSH key pair for EC2 access
 
-#### 1. EC2 Instance Setup
+#### Step 1: Create EC2 Instances
 ```bash
-# Update system
-sudo yum update -y
+# Instance 1: Apache Web Server
+# - Amazon Linux 2023
+# - Security Group: HTTP(80), HTTPS(443), SSH(22)
 
-# Install Java 17
-sudo yum install java-17-amazon-corretto -y
-
-# Install Maven
-sudo yum install maven -y
-
-# Install Apache
-sudo yum install httpd -y
-
-# Start services
-sudo systemctl start httpd
-sudo systemctl enable httpd
+# Instance 2: Spring Boot Application  
+# - Amazon Linux 2023
+# - Security Group: Custom TCP(8443), SSH(22)
 ```
 
-#### 2. Security Group Configuration
-- **Apache Server**: Port 80 (HTTP), Port 443 (HTTPS)
-- **Spring Server**: Port 8080 (HTTP), Port 8443 (HTTPS)
-- **SSH**: Port 22 (for management)
-
-#### 3. Let's Encrypt Certificate Setup
+#### Step 2: Deploy Apache Server
 ```bash
-# Install Certbot
-sudo yum install certbot python3-certbot-apache -y
+# Connect to Apache instance
+ssh -i your-key.pem ec2-user@<APACHE_PUBLIC_IP>
 
-# Generate certificates (necesitas un dominio)
+# Clone and deploy
+git clone https://github.com/SantiagoAmaya21/TDSE_secure-application-design.git
+cd TDSE_secure-application-design
+chmod +x scripts/aws-deploy-apache-duckdns.sh
+./scripts/aws-deploy-apache-duckdns.sh tdse-secure-app TU_DUCKDNS_TOKEN
+
+# Configure SSL (DuckDNS domain already configured in script)
+sudo certbot --apache -d tdse-secure-app.duckdns.org
+```
+
+#### Step 3: Deploy Spring Boot
+```bash
+# Connect to Spring instance
+ssh -i your-key.pem ec2-user@<SPRING_PUBLIC_IP>
+
+# Clone and deploy
+git clone https://github.com/SantiagoAmaya21/TDSE_secure-application-design.git
+cd TDSE_secure-application-design
+chmod +x scripts/aws-deploy-spring.sh
+chmod +x scripts/setup-ssl-spring-duckdns.sh
+./scripts/aws-deploy-spring.sh
+./scripts/setup-ssl-spring-duckdns.sh tdse-secure-app.duckdns.org TU_DUCKDNS_TOKEN
+```
+
+#### Step 4: Update Configuration
+```bash
+# On Apache instance - frontend already configured for tdse-secure-app.duckdns.org
+# No changes needed to config.js
+
+# On Spring instance - CORS already configured for tdse-secure-app.duckdns.org
+# No changes needed to application-production.properties
+```
+
+### 📋 Detailed Instructions
+For complete step-by-step instructions, see: **[scripts/aws-academy-guide.md](scripts/aws-academy-guide.md)**
+
+### 🔧 Manual Configuration
+
+#### Apache Configuration
+```bash
+# Install Apache
+sudo dnf install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+# Deploy frontend
+sudo cp -r web-tier/* /var/www/html/
+
+# SSL with Let's Encrypt
+sudo dnf install certbot python3-certbot-apache -y
+sudo certbot --apache -d your-domain.com
+```
+
+#### Spring Boot Configuration
+```bash
+# Install Java and Maven
+sudo dnf install java-17-amazon-corretto maven -y
+
+# Build application
+cd application-tier
+mvn clean package -DskipTests
+
+# Run with production profile
+java -jar -Dspring.profiles.active=production target/secureapp-0.0.1-SNAPSHOT.jar
+```
+
+### 🔒 SSL/TLS Configuration
+
+#### Let's Encrypt for Apache
+```bash
+# Generate certificate
 sudo certbot --apache -d your-domain.com
 
-# Set up auto-renewal
+# Auto-renewal
 sudo crontab -e
 # Add: 0 12 * * * /usr/bin/certbot renew --quiet
 ```
 
-#### 4. Backend Deployment
+#### Let's Encrypt for Spring Boot
 ```bash
-# Clone repository
-git clone <tu-repository-url>
-cd TDSE_secure-application-design/application-tier
+# Generate certificate
+sudo certbot certonly --standalone -d your-spring-domain.com
 
-# Build application
-mvn clean package -DskipTests
-
-# Run as service
-sudo java -jar target/demo-0.0.1-SNAPSHOT.jar
-```
-
-#### 5. Frontend Deployment
-```bash
-# Copy files to Apache directory
-sudo cp -r web-tier/* /var/www/html/
-
-# Configure Apache for HTTPS
-sudo nano /etc/httpd/conf.d/ssl.conf
+# Create PKCS12 keystore
+sudo openssl pkcs12 -export \
+  -in /etc/letsencrypt/live/your-domain/fullchain.pem \
+  -inkey /etc/letsencrypt/live/your-domain/privkey.pem \
+  -out keystore.p12 \
+  -name springboot \
+  -password pass:CHANGEME
 ```
 
 ## 🔍 API Endpoints
