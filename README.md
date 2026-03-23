@@ -326,48 +326,9 @@ mvn test
    - API endpoint protection
    - CORS configuration
 
-## Limitations & External Dependencies
+## Deployment on AWS
 
-### What Cannot Be Automated (Requires Manual Setup):
-
-1. **AWS Infrastructure**
-   - EC2 instance creation and configuration
-   - VPC and security group setup
-   - Elastic IP allocation
-   - IAM roles and policies
-
-2. **Domain and DNS**
-   - Domain name registration
-   - DNS record configuration
-   - Route 53 setup
-
-3. **SSL Certificates**
-   - Let's Encrypt certificate generation
-   - Certificate renewal setup
-   - Apache SSL configuration
-
-4. **Production Database**
-   - RDS instance setup
-   - Database migration scripts
-   - Backup configuration
-
-5. **Load Balancing**
-   - Application Load Balancer setup
-   - Health checks configuration
-   - Auto-scaling policies
-
-6. **Monitoring & Alerting**
-   - CloudWatch configuration
-   - SNS notification setup
-   - Log aggregation
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+For detailed deployment instructions, please refer to the [AWS Academy Deployment Guide](scripts/aws-academy-guide.md).
 
 ## License
 
