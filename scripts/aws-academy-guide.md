@@ -253,33 +253,33 @@ sudo firewall-cmd --reload
 ### Required Screenshots
 1. **AWS Console** - EC2 instances running
 
-![imagen1](img/imagen1.png)
+![imagen1](../img/imagen1.png)
 
 2. **Security Groups** - Configuration rules
 
-![imagen2](img/imagen2.png)
+![imagen2](../img/imagen2.png)
 
-![imagen3](img/imagen3.png)
+![imagen3](../img/imagen3.png)
 
 3. **Apache Server** - HTTPS working with padlock
 
-![imagen7](img/imagen7.png)
+![imagen7](../img/imagen7.png)
 
 4. **Spring Boot** - API responding via HTTPS
 
-![imagen4](img/imagen4.png)
+![imagen4](../img/imagen4.png)
 
 5. **Application** - Login screen
 
-![imagen8](img/imagen8.png)
+![imagen8](../img/imagen8.png)
 
 6. **Application** - Dashboard after login
 
-![imagen5](img/imagen5.png)
+![imagen5](../img/imagen5.png)
 
 7. **Certificate** - Let's Encrypt details
 
-![imagen6](img/imagen6.png)
+![imagen6](../img/imagen6.png)
 
 
 ## Support Resources
